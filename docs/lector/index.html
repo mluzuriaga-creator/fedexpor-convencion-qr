@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="../assets/isotipo-x.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Lector · Convención</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lector.css">
+</head>
+<body>
+
+<!-- Configuración inicial -->
+<section id="vConfig" class="vista">
+  <img class="logo" src="../assets/convencion.png" alt="">
+  <h1>Lector de registro</h1>
+  <label>Lector
+    <select id="cLector">
+      <option value="">— Elegir —</option>
+      <option>M1-A</option><option>M1-B</option><option>M2-A</option><option>M2-B</option>
+      <option value="MASTER-1">Máster 1</option><option value="MASTER-2">Máster 2</option>
+    </select>
+  </label>
+  <label>Clave de operador <input id="cClave" type="password" inputmode="numeric" autocomplete="off"></label>
+  <button id="cEntrar" class="grande">Entrar</button>
+  <p id="cMsg" class="msg"></p>
+  <p class="nota" id="cEnv"></p>
+</section>
+
+<!-- Pantalla principal -->
+<section id="vMain" class="vista oculto">
+  <div id="franjaModo" class="franja"></div>
+  <header class="barra">
+    <div><b id="hLector"></b> · <span id="hConexion"></span></div>
+    <div><span id="hContador">0</span> registros</div>
+  </header>
+  <div id="camara"></div>
+  <button id="bIniciar" class="grande">Iniciar cámara</button>
+  <nav class="acciones">
+    <button id="bBuscar">Búsqueda manual</button>
+    <button id="bSitio">Registro en sitio</button>
+    <button id="bHistorial">Historial</button>
+    <button id="bMas">⋯</button>
+  </nav>
+</section>
+
+<!-- Resultado a pantalla completa -->
+<section id="vResultado" class="vista oculto resultado">
+  <div class="rTitulo" id="rTitulo"></div>
+  <div class="rEtiqueta oculto" id="rEtiqueta"></div>
+  <div class="rId" id="rId"></div>
+  <div class="rNombre" id="rNombre"></div>
+  <div class="rEmpresa" id="rEmpresa"></div>
+  <div class="rTipo" id="rTipo"></div>
+  <div class="rDetalle" id="rDetalle"></div>
+  <div class="rBotones" id="rBotones"></div>
+</section>
+
+<!-- Búsqueda manual -->
+<section id="vBuscar" class="vista oculto panelAlto">
+  <header class="barraSimple"><button class="volver">← Volver</button><b>Búsqueda manual</b></header>
+  <input id="qTexto" placeholder="Nombre, empresa o ID" autocomplete="off">
+  <ul id="qLista" class="lista"></ul>
+</section>
+
+<!-- Registro en sitio -->
+<section id="vSitio" class="vista oculto panelAlto">
+  <header class="barraSimple"><button class="volver">← Volver</button><b>Registro en sitio</b></header>
+  <label>Nombre* <input id="sNombre" autocomplete="off"></label>
+  <label>Empresa* <input id="sEmpresa" autocomplete="off"></label>
+  <label>Cargo <input id="sCargo" autocomplete="off"></label>
+  <label>Correo <input id="sCorreo" type="email" autocomplete="off"></label>
+  <label>Celular <input id="sCelular" inputmode="tel" autocomplete="off"></label>
+  <button id="sGuardar" class="grande">Registrar y dar ingreso</button>
+  <p id="sMsg" class="msg"></p>
+</section>
+
+<!-- Historial -->
+<section id="vHistorial" class="vista oculto panelAlto">
+  <header class="barraSimple"><button class="volver">← Volver</button><b>Últimos registros de este teléfono</b></header>
+  <ul id="hLista" class="lista"></ul>
+</section>
+
+<!-- Más opciones -->
+<section id="vMas" class="vista oculto panelAlto">
+  <header class="barraSimple"><button class="volver">← Volver</button><b>Opciones</b></header>
+  <button id="oActualizar">Actualizar padrón ahora</button>
+  <button id="oLinterna" class="oculto">Linterna</button>
+  <button id="oModo" class="oculto"></button>
+  <button id="oSalir" class="peligro">Cerrar sesión de este lector</button>
+  <p class="nota" id="oInfo"></p>
+</section>
+
+<script src="../config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="lector.js"></script>
+</body>
+</html>

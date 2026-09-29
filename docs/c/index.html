@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XVIII Convención de Exportadores</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --oro1: #9a743c; --oro2: #d6b16f; --fondo: #000; --texto: #fff; --suave: #bdbdbd; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; background: var(--fondo); color: var(--texto); font-family: Poppins, Arial, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+  main { width: 100%; max-width: 420px; text-align: center; }
+  .linea { height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--oro1), var(--oro2)); margin: 0 auto 28px; width: 120px; }
+  img.logo { width: 78%; max-width: 300px; }
+  h1 { font-size: 1.35rem; font-weight: 600; margin: 26px 0 10px; line-height: 1.35; }
+  p { color: var(--suave); font-size: 1rem; line-height: 1.55; margin: 0 0 22px; }
+  .dato { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 8px 0; font-size: 1.02rem; }
+  .ico { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--oro2); display: inline-flex; align-items: center; justify-content: center; color: var(--oro2); font-size: 14px; }
+  a.boton { display: inline-block; margin-top: 26px; padding: 13px 28px; border-radius: 26px; color: #000; font-weight: 600; text-decoration: none;
+    background: linear-gradient(90deg, var(--oro1), var(--oro2)); }
+  .pie { margin-top: 34px; font-size: .8rem; color: #777; }
+</style>
+</head>
+<body>
+<main>
+  <div class="linea"></div>
+  <img class="logo" src="../assets/convencion.png" alt="XVIII Convención de Exportadores">
+  <h1>Próximamente inicia la <span id="nombre">XVIII Convención de Exportadores</span></h1>
+  <p>Presenta este código en la mesa de registro el día del evento.</p>
+  <div class="dato"><span class="ico">⌖</span><span id="lugar"></span></div>
+  <div class="dato"><span class="ico">▦</span><span id="fecha"></span></div>
+  <a class="boton" id="agenda" href="#">Ver agenda</a>
+  <div class="pie">Esta página es solo informativa: no registra asistencia.</div>
+</main>
+<script src="../config.js"></script>
+<script>
+  // Solo muestra información: no llama a la API ni lee el código de la dirección.
+  var ev = window.FEDEXPOR.evento;
+  document.getElementById('nombre').textContent = ev.nombre;
+  document.getElementById('lugar').textContent = ev.lugar;
+  document.getElementById('fecha').textContent = ev.fecha + ' · ' + ev.hora;
+  document.getElementById('agenda').href = ev.agenda;
+</script>
+</body>
+</html>

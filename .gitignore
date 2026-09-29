@@ -1,0 +1,35 @@
+# Datos del evento y de personas: NUNCA al repositorio (repo público)
+CONFIG_EVENTO.md
+*.xlsx
+*.xls
+*.csv
+*.tsv
+*.ods
+datos/
+exportaciones/
+respaldos/
+**/*personas*
+**/*asistentes*
+**/*padron*.json
+
+# Credenciales de clasp y secretos
+.clasprc.json
+**/.clasprc.json
+.env
+*.key
+
+# Sistema
+node_modules/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDs de los proyectos de Apps Script (viven en CONFIG_EVENTO.md)
+.clasp.json
+**/.clasp.json
+
+# Carpetas de subida generadas por scripts/subir.sh
+apps-script/build/
+
+# Configuración local de Claude Code
+.claude/

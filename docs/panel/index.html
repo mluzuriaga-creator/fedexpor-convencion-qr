@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Panel en vivo · Convención</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --oro1: #9a743c; --oro2: #d6b16f; --fondo: #0a0a0a; --panel: #151515; --borde: #2a2a2a; --texto: #f2f2f2; --suave: #9e9e9e; --verde: #34a853; }
+  @media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { --fondo: #f6f4ef; --panel: #fff; --borde: #e3ddd0; --texto: #1a1a1a; --suave: #6b6b6b; } }
+  :root[data-theme="light"] { --fondo: #f6f4ef; --panel: #fff; --borde: #e3ddd0; --texto: #1a1a1a; --suave: #6b6b6b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--texto); font-family: Poppins, Arial, sans-serif; padding: 16px; }
+  header { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  header img { height: 52px; }
+  header .act { color: var(--suave); font-size: .85rem; }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi { background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: 14px; }
+  .kpi .v { font-size: 2.2rem; font-weight: 700; line-height: 1.1; }
+  .kpi .l { color: var(--suave); font-size: .85rem; }
+  .kpi.oro .v { color: var(--oro2); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  .caja { background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: 14px; }
+  .caja h2 { font-size: 1rem; margin: 0 0 10px; }
+  .barra { margin: 8px 0; font-size: .88rem; }
+  .barra .fondo { height: 10px; border-radius: 6px; background: var(--borde); overflow: hidden; margin-top: 4px; }
+  .barra .lleno { height: 100%; background: linear-gradient(90deg, var(--oro1), var(--oro2)); }
+  .curva { display: flex; align-items: flex-end; gap: 4px; height: 120px; }
+  .curva div { flex: 1; background: linear-gradient(180deg, var(--oro2), var(--oro1)); border-radius: 4px 4px 0 0; position: relative; min-height: 2px; }
+  .curva span { position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: .6rem; color: var(--suave); white-space: nowrap; }
+  .tabs { display: flex; gap: 6px; margin: 16px 0 10px; flex-wrap: wrap; }
+  .tabs button, input { font: inherit; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); }
+  .tabs button.activo { background: linear-gradient(90deg, var(--oro1), var(--oro2)); color: #000; border: none; font-weight: 600; }
+  input { width: 100%; margin-bottom: 10px; }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--borde); }
+  th { color: var(--suave); font-weight: 600; }
+  td.id { font-weight: 700; color: var(--oro2); }
+  .tablaWrap { overflow-x: auto; }
+  @media (max-width: 720px) { .kpis { grid-template-columns: repeat(2, 1fr); } .grid { grid-template-columns: 1fr; } .opc { display: none; } }
+</style>
+</head>
+<body>
+<header>
+  <img src="../assets/convencion.png" alt="XVIII Convención de Exportadores">
+  <div class="act">Actualizado <b id="hora">—</b> · se refresca cada 15 s <button id="tema" style="margin-left:8px">◐</button></div>
+</header>
+<section class="kpis">
+  <div class="kpi"><div class="v" id="kEsp">—</div><div class="l">Esperados</div></div>
+  <div class="kpi oro"><div class="v" id="kLle">—</div><div class="l">Llegaron</div></div>
+  <div class="kpi"><div class="v" id="kFal">—</div><div class="l">Faltan</div></div>
+  <div class="kpi"><div class="v" id="kPct">—</div><div class="l">Asistencia</div></div>
+</section>
+<section class="grid">
+  <div class="caja"><h2>Por tipo de inscrito</h2><div id="tipos"></div></div>
+  <div class="caja"><h2>Por lector</h2><div id="lectores"></div></div>
+</section>
+<section class="caja" style="margin-top:12px"><h2>Llegadas cada 15 minutos</h2><div class="curva" id="curva"></div><div style="height:18px"></div></section>
+<nav class="tabs">
+  <button data-t="ultimos" class="activo">Últimos</button>
+  <button data-t="listaLlegaron">Llegaron</button>
+  <button data-t="listaFaltan">Faltan</button>
+  <button data-t="enSitio">Registro en sitio</button>
+</nav>
+<input id="buscar" placeholder="Buscar por nombre, empresa o ID">
+<div class="tablaWrap"><table><thead><tr><th>ID</th><th>Nombre</th><th>Empresa</th><th class="opc">Cargo</th><th class="opc">Tipo</th><th>Hora</th><th class="opc">Lector</th></tr></thead><tbody id="filas"></tbody></table></div>
+
+<script src="../config.js"></script>
+<script>
+(function () {
+  var API = window.fedexporApi(), datos = null, tab = 'ultimos';
+  var $ = function (id) { return document.getElementById(id); };
+  function norm(s) { return String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+  function td(t, c) { var x = document.createElement('td'); x.textContent = t || ''; if (c) x.className = c; return x; }
+  function pintar() {
+    if (!datos) return;
+    $('hora').textContent = datos.generado;
+    $('kEsp').textContent = datos.esperados; $('kLle').textContent = datos.llegaron; $('kFal').textContent = datos.faltan;
+    $('kPct').textContent = datos.esperados ? Math.round(datos.llegaron * 100 / datos.esperados) + '%' : '—';
+    var t = $('tipos'); t.innerHTML = '';
+    Object.keys(datos.porTipo).sort().forEach(function (k) {
+      var x = datos.porTipo[k], pct = x.esperados ? Math.min(100, x.llegaron * 100 / x.esperados) : 0;
+      var d = document.createElement('div'); d.className = 'barra';
+      d.innerHTML = '<div><b></b> <span style="float:right"></span></div><div class="fondo"><div class="lleno"></div></div>';
+      d.querySelector('b').textContent = k; d.querySelector('span').textContent = x.llegaron + ' / ' + x.esperados;
+      d.querySelector('.lleno').style.width = pct + '%'; t.appendChild(d);
+    });
+    var l = $('lectores'); l.innerHTML = '';
+    var max = Math.max.apply(null, [1].concat(Object.keys(datos.porLector).map(function (k) { return datos.porLector[k]; })));
+    Object.keys(datos.porLector).sort().forEach(function (k) {
+      var d = document.createElement('div'); d.className = 'barra';
+      d.innerHTML = '<div><b></b> <span style="float:right"></span></div><div class="fondo"><div class="lleno"></div></div>';
+      d.querySelector('b').textContent = k.replace('MASTER-', 'Máster '); d.querySelector('span').textContent = datos.porLector[k];
+      d.querySelector('.lleno').style.width = (datos.porLector[k] * 100 / max) + '%'; l.appendChild(d);
+    });
+    if (!Object.keys(datos.porLector).length) l.textContent = 'Todavía no hay registros.';
+    var c = $('curva'); c.innerHTML = '';
+    var ks = Object.keys(datos.franjas).sort(), mx = Math.max.apply(null, [1].concat(ks.map(function (k) { return datos.franjas[k]; })));
+    ks.forEach(function (k) { var b = document.createElement('div'); b.style.height = (datos.franjas[k] * 100 / mx) + '%'; b.title = k + ': ' + datos.franjas[k]; var s = document.createElement('span'); s.textContent = k; b.appendChild(s); c.appendChild(b); });
+    var q = norm($('buscar').value), tb = $('filas'); tb.innerHTML = '';
+    (datos[tab] || []).filter(function (p) { return !q || norm(p.id + ' ' + p.n + ' ' + p.e).indexOf(q) !== -1; }).slice(0, 400).forEach(function (p) {
+      var tr = document.createElement('tr');
+      [td(p.id, 'id'), td(p.n), td(p.e), td(p.c, 'opc'), td(p.tp, 'opc'), td(p.h), td(String(p.l || '').replace('MASTER-', 'Máster '), 'opc')].forEach(function (x) { tr.appendChild(x); });
+      tb.appendChild(tr);
+    });
+  }
+  function cargar() {
+    fetch(API.url + '?action=panel').then(function (r) { return r.json(); }).then(function (r) { if (r.ok) { datos = r.datos; pintar(); } }).catch(function () { /* reintenta */ });
+  }
+  document.querySelectorAll('.tabs button').forEach(function (b) {
+    b.onclick = function () { tab = b.dataset.t; document.querySelectorAll('.tabs button').forEach(function (x) { x.classList.toggle('activo', x === b); }); pintar(); };
+  });
+  $('buscar').oninput = pintar;
+  $('tema').onclick = function () { var r = document.documentElement; r.dataset.theme = r.dataset.theme === 'dark' ? 'light' : 'dark'; };
+  cargar(); setInterval(cargar, 15000);
+})();
+</script>
+</body>
+</html>

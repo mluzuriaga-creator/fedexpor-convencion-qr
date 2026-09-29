@@ -1,0 +1,51 @@
+:root { --oro1: #9a743c; --oro2: #d6b16f; --fondo: #000; --texto: #fff; --suave: #a8a8a8; --panel: #141414; --borde: #2c2c2c;
+  --verde: #0f9d58; --rojo: #d93025; --amarillo: #f4b400; --naranja: #ef6c00; --azul: #1a73e8; --morado: #7b1fa2; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--fondo); color: var(--texto); font-family: Poppins, Arial, sans-serif; }
+body { min-height: 100vh; }
+.oculto { display: none !important; }
+.vista { min-height: 100vh; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.logo { width: 70%; max-width: 280px; align-self: center; margin-top: 12px; }
+h1 { text-align: center; font-size: 1.3rem; margin: 6px 0 10px; }
+label { display: flex; flex-direction: column; gap: 6px; font-size: .95rem; color: var(--suave); }
+input, select { font: inherit; font-size: 1.1rem; padding: 12px; border-radius: 10px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); }
+button { font: inherit; font-size: 1rem; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--borde); background: var(--panel); color: var(--texto); }
+button.grande { font-size: 1.15rem; font-weight: 600; padding: 16px; border: none; color: #000; background: linear-gradient(90deg, var(--oro1), var(--oro2)); }
+button.peligro { color: #ff8a80; border-color: #5c2a2a; }
+.msg { min-height: 1.4em; text-align: center; color: #ff8a80; margin: 0; }
+.nota { color: var(--suave); font-size: .85rem; text-align: center; }
+.franja { margin: -16px -16px 0; padding: 8px; text-align: center; font-weight: 700; letter-spacing: 2px; }
+.franja.prueba { background: var(--morado); }
+.franja.real { background: #0b3d1f; color: #9ce3b3; }
+.barra { display: flex; justify-content: space-between; font-size: .9rem; color: var(--suave); }
+.barra b { color: var(--texto); }
+#camara { width: 100%; border-radius: 14px; overflow: hidden; background: #111; min-height: 55vh; }
+#camara video { object-fit: cover; }
+.acciones { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; }
+.acciones button { font-size: .88rem; padding: 12px 6px; }
+
+.resultado { justify-content: center; align-items: center; text-align: center; gap: 10px; }
+.resultado.verde { background: var(--verde); }
+.resultado.rojo { background: var(--rojo); }
+.resultado.amarillo { background: var(--amarillo); color: #000; }
+.resultado.naranja { background: var(--naranja); }
+.resultado.azul { background: var(--azul); }
+.rTitulo { font-size: 2rem; font-weight: 700; line-height: 1.15; }
+.rEtiqueta { background: #fff; color: #000; font-weight: 700; padding: 6px 14px; border-radius: 20px; letter-spacing: 1px; }
+.rId { font-size: 5.5rem; font-weight: 700; line-height: 1; }
+.rNombre { font-size: 1.5rem; font-weight: 600; }
+.rEmpresa, .rTipo { font-size: 1.1rem; opacity: .95; }
+.rDetalle { font-size: 1.05rem; opacity: .95; min-height: 1.3em; }
+.rBotones { display: grid; gap: 10px; width: 100%; max-width: 440px; margin-top: 14px; }
+.rBotones button { font-size: 1.15rem; font-weight: 600; padding: 16px; background: rgba(0,0,0,.28); border: 2px solid rgba(255,255,255,.55); color: inherit; }
+.rBotones button.principal { background: #fff; color: #000; border-color: #fff; }
+
+.panelAlto { gap: 10px; }
+.barraSimple { display: flex; align-items: center; gap: 12px; }
+.barraSimple button { padding: 8px 12px; }
+.lista { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.lista li { background: var(--panel); border: 1px solid var(--borde); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.lista li .t { font-weight: 600; }
+.lista li .s { color: var(--suave); font-size: .85rem; }
+.lista li .id { font-weight: 700; color: var(--oro2); font-size: 1.2rem; min-width: 3.6em; }
+.lista li.llego { opacity: .6; }
