@@ -6,6 +6,7 @@ function onOpen() {
   var menu = SpreadsheetApp.getUi().createMenu('Fedexpor QR')
     .addItem('Sincronizar Maestro', 'menuSincronizar')
     .addItem('Exportar lista para stickers', 'menuExportarStickers')
+    .addItem('Generar planillas de stickers (PDF)', 'menuPlanillasStickers')
     .addItem('Marcar corte de impresión', 'menuMarcarCorte');
   // Etapa 2: solo aparece si el módulo de credenciales está instalado.
   if (typeof agregarMenuCredenciales_ === 'function') { menu.addSeparator(); agregarMenuCredenciales_(menu); }

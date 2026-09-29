@@ -71,6 +71,8 @@ var CONFIG_INICIAL = [
   ['CARPETA_RECURSOS', 'Recursos credencial · XVIII Convención', 'Carpeta de Drive con fondo-credencial.png e isotipo-x.png.'],
   ['CARPETA_CREDENCIALES_ID', '', 'La crea el sistema.'],
   ['PLANTILLA_CREDENCIAL_ID', '', 'La crea «Credenciales → Crear plantilla».'],
+  ['PLANTILLA_PLANILLAS_ID', '', 'Plantilla A4 de las planillas de stickers. La crea el sistema.'],
+  ['STICKERS_DOBLES', 'E', 'Siglas que llevan DOS stickers por persona en la planilla (ej.: E para speakers). Separadas por |.'],
   ['GENERACION_ESTADO', '', 'Avance de la generación de credenciales. Lo escribe el sistema.'],
   ['CARPETA_ENTREGA_ID', '', 'Carpeta «Credenciales por auspiciante». La crea el sistema.'],
   ['EVENTO_APERTURA_REGISTRO', '07:00', 'Hora en que abre la mesa de registro (los operadores no registran antes, salvo en modo PRUEBA).'],
@@ -82,7 +84,9 @@ var CONFIG_INICIAL = [
   ['CORREO_ASUNTO_CREDENCIAL', 'Su credencial · XVIII Convención de Exportadores', ''],
   ['CORREO_ASUNTO_RECORDATORIO', 'Recordatorio · XVIII Convención de Exportadores · 30 de septiembre', ''],
   ['CORREO_INDICACIONES_LLEGADA', 'Le recomendamos llegar con anticipación: el evento inicia a las 08:30. Presente su código QR desde su celular; no es necesario imprimirlo.', 'Párrafo del recordatorio.'],
-  ['WHATSAPP_MENSAJE', 'Estimado/a {NOMBRE}: le compartimos su credencial para la XVIII Convención de Exportadores de Fedexpor, el {FECHA} a las {HORA} en {LUGAR}. Credencial: {CREDENCIAL} · Agenda: {AGENDA}. Preséntela en la mesa de registro desde su celular.', 'Texto de los links de WhatsApp. Marcadores: {NOMBRE} {FECHA} {HORA} {LUGAR} {CREDENCIAL} {AGENDA}.']
+  ['WHATSAPP_MENSAJE', 'Estimado/a {NOMBRE}: le compartimos su credencial para la XVIII Convención de Exportadores de Fedexpor, el {FECHA} a las {HORA} en {LUGAR}, {SALON}. Credencial: {CREDENCIAL} · Agenda: {AGENDA}. Preséntela en la mesa de registro desde su celular.', 'Texto de los links de WhatsApp. Marcadores: {NOMBRE} {FECHA} {HORA} {LUGAR} {SALON} {CREDENCIAL} {AGENDA}.'],
+  ['EVENTO_SALON', 'Salón Amazonas', 'Salón del evento (marcador {SALON} del mensaje de WhatsApp).'],
+  ['WHATSAPP_RESPONSABLES', 'Responsable 1 | Responsable 2 | Responsable 3', 'Personas del equipo que envían los WhatsApp, separadas por |. La lista se reparte en partes iguales.']
 ];
 
 function leerConfig_(ss) {

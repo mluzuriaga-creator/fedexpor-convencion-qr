@@ -227,13 +227,13 @@ function destinatarios_(ss, cfg, plantilla, uids, forzar) {
   var m = leerMaestro_(ss), ids = idsCredencialPorUid_(m), col = plantillasCorreo_()[plantilla].col;
   var filtro = null;
   if (uids) { filtro = {}; uids.forEach(function (u) { filtro[u] = true; }); }
-  var van = [], fuera = { 'Retirado o sin ID': 0, 'Lo entrega el auspiciante': 0, 'Sin correo': 0, 'Correo inválido': 0, 'Sin credencial': 0, 'Credencial desactualizada': 0, 'Ya enviado': 0 };
+  var van = [], fuera = { 'Retirado o sin ID': 0, 'Cupo sin nombre (va por el auspiciante)': 0, 'Sin correo': 0, 'Correo inválido': 0, 'Sin credencial': 0, 'Credencial desactualizada': 0, 'Ya enviado': 0 };
   m.filas.forEach(function (r) {
     var uid = String(r[M.UID] || '');
     if (!uid || (filtro && !filtro[uid])) return;
     var correo = String(r[M.CORREO] || '').trim();
     if (r[M.ESTADO_INSC] !== ESTADO_ACTIVO || !parsearId_(r[M.ID])) fuera['Retirado o sin ID']++;
-    else if (cfg.entregaPorDueno.indexOf(String(r[M.PESTANA])) !== -1) fuera['Lo entrega el auspiciante']++;
+    else if (esCupoSinNombre_(r)) fuera['Cupo sin nombre (va por el auspiciante)']++;
     else if (!correo) fuera['Sin correo']++;
     else if (!correoValido_(correo)) fuera['Correo inválido']++;
     else if (!ids[uid]) fuera['Sin credencial']++;

@@ -671,7 +671,7 @@ var PRUEBAS_T = [
     var z = ctx.base.porNombre['Zacarías Auspicio León'];
     c.ok(z && z.alertas.indexOf('excede cupo') === -1, 'Zacarías no debe tener alerta de excedente');
     var d = destinatarios_(ss, cfg, 'CREDENCIAL', null, false);
-    c.eq(d.fuera['Lo entrega el auspiciante'], 6, 'AUSPICIANTES fuera del correo');
+    c.eq(d.fuera['Cupo sin nombre (va por el auspiciante)'], 6, 'Cupos sin nombre fuera del correo');
     return c.fin('6 cupos con «Invitado N de DUEÑO» · excedente 6A con alerta · 6 de AUSPICIANTES fuera del correo');
   } },
   { id: 'T26', accion: 'Escribir a una persona en la fila de un cupo; borrar un cupo y escribir a la persona en otra fila', esperado: 'La persona hereda el ID y el QR del cupo; no se crean IDs nuevos', fn: function (ss, ctx) {
