@@ -1,7 +1,7 @@
 // Direcciones del Web App de Apps Script. No son secretas: toda escritura exige la clave del lector.
 window.FEDEXPOR = {
   api: {
-    real: '',  // se completa al pasar la etapa 4 a producción
+    real: 'https://script.google.com/macros/s/AKfycbxvjSbbwrEpSX_wIAhBwy_iW8W70KokLWkvQjWz7mThRMz0bZw8kGNaevLfvQjmsxyk/exec',
     pruebas: 'https://script.google.com/macros/s/AKfycbyDrvSLTjgB-XlzYDJRZ77TX30QCYerS-wq93U91FkyKiBuVWH857XHla0GGxM2WwOi/exec'
   },
   evento: {
